@@ -1,0 +1,11 @@
+<app-table [columnTable]="column" [data]="products">
+  <input tableSearch type="text" placeholder="hhhhhhhhh" />
+  <ng-template #name let-rowData let-col="column">
+    <p style="color: blue">test {{ rowData.name }}</p>
+  </ng-template>
+  <ng-template #description let-rowData let-col="column">
+    <td>
+      <p style="color: red">test {{ rowData.description }}</p>
+    </td>
+  </ng-template>
+</app-table>

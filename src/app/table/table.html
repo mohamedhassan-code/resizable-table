@@ -1,0 +1,35 @@
+<div class="card">
+  <ng-content select="[tableSearch]"></ng-content>
+
+  <p-table [columns]="columnTable()" [value]="data()" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template #header let-columns>
+      <tr>
+        @for (col of columns; track $index) {
+        <th>
+          {{ col.header }}
+        </th>
+        }
+      </tr>
+    </ng-template>
+    <ng-template #body let-rowData let-columns="columns">
+      <tr>
+        @for (col of columns; track $index) { @if (col.custom && customTemplates()) {
+        <td>
+          <ng-container
+            *ngTemplateOutlet="
+              templateMap().get(col.key);
+              context: { $implicit: rowData, column: col }
+            "
+          >
+            >
+          </ng-container>
+        </td>
+        }@else {
+        <td>
+          {{ rowData[col.key] }}
+        </td>
+        } }
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
